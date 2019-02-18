@@ -1,0 +1,11 @@
+galaxy_info:
+  author: Tristan Le Guern
+  description: 
+  company: Deveryware
+  license: ICS
+  min_ansible_version: 2.7
+  galaxy_tags:
+  - piwik
+  - matomo
+  - analytics
+dependencies: []

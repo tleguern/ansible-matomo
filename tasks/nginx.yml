@@ -1,0 +1,29 @@
+---
+# Taken from https://github.com/kuzm1ch/matomo-piwik
+
+- name: ensure nginx configuration file is present
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/sites-available/matomo
+  notify: Restart nginx
+
+- name: ensure symbolic link is present
+  file:
+    src: /etc/nginx/sites-available/matomo
+    dest: /etc/nginx/sites-enabled/matomo
+    state: link
+  notify: Restart nginx
+
+- name: disable the default config
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Restart nginx
+
+- name: Ensure nginx is started
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- meta: flush_handlers

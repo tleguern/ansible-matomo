@@ -1,0 +1,29 @@
+---
+- name: MySQL - Ensure database is created
+  mysql_db:
+    name: "{{ __matomo_mysql_database }}"
+    state: present
+
+- name: MySQL - Ensure matomo user is created
+  mysql_user:
+    name: "{{ __matomo_mysql_user }}"
+    host: "%"
+    password: "{{ __matomo_mysql_password }}"
+    priv: "*.*:FILE/{{ __matomo_mysql_database }}.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,CREATE\ TEMPORARY\ TABLES,LOCK\ TABLES"
+    state: present
+
+- name: MySQL - Ensure rescue user is created
+  mysql_user:
+    name: "{{ mysql_rescue_user }}"
+    host: "%"
+    password: "{{ mysql_rescue_password }}"
+    priv: "*.*:SUPER,PROCESS/{{ __matomo_mysql_database }}.*:ALL"
+    state: present
+  when: "mysql_rescue_user is defined"
+
+- name: MySQL - Ensure recommended default is used
+  ini_file:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    section: mysqld
+    option: max_allowed_packet
+    value: 64MB

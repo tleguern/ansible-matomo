@@ -1,0 +1,142 @@
+---
+- include: mysql.yml
+
+- name: Download and extract matomo
+  unarchive:
+    src: https://builds.matomo.org/matomo-3.8.1.tar.gz
+    dest: /var/www
+    remote_src: true
+    owner: www-data
+    group: www-data
+    mode: 0755
+
+- name: Remove superflous file
+  file:
+    path: "/var/www/How to install Matomo.html"
+    state: absent
+
+- include: nginx.yml
+
+- wait_for:
+    host: localhost
+    port: 80
+    state: started
+    delay: 5
+
+- name: Step 1 Welcome
+  uri:
+    url: "http://localhost/index.php?action=welcome"
+    method: GET
+    status_code: 200
+    validate_certs: no
+
+- pause:
+    seconds: 1
+
+- name: Step 2 System Check
+  uri:
+    url: "http://localhost/index.php?action=systemCheck"
+    method: GET
+    status_code: 200
+    validate_certs: no
+
+- pause:
+    seconds: 1
+
+- name: Step 3 Database Set-up
+  uri:
+    url: "http://localhost/index.php?action=databaseSetup"
+    body:
+      host: "127.0.0.1"
+      username: "{{ __matomo_mysql_user }}"
+      password: "{{ __matomo_mysql_password }}"
+      dbname: "{{ __matomo_mysql_database }}"
+      tables_prefix: "matomo_"
+      adapter: "PDO\\MYSQL"
+    body_format: form-urlencoded
+    method: POST
+    status_code: 302
+    validate_certs: no
+
+- pause:
+    seconds: 1
+
+- name: Step 4 Table Creation
+  uri:
+    url: "http://localhost/index.php?action=tablesCreation&module=Installation"
+    method: GET
+    status_code: 200
+    validate_certs: no
+
+- pause:
+    seconds: 1
+
+- name: Step 5 General Set-up
+  uri:
+    url: "http://localhost/index.php?action=setupSuperUser&module=Installation"
+    body:
+      login: "{{ matomo_superuser_user }}"
+      password: "{{ matomo_superuser_password }}"
+      password_bis: "{{ matomo_superuser_password }}"
+      email: "_ops@deverywa.re"
+      subscribe_newsletter_piwikorg: 0
+      subscribe_newsletter_professionalservices: 0
+    body_format: form-urlencoded
+    method: POST
+    status_code: 302
+    validate_certs: no
+
+- pause:
+    seconds: 1
+
+- name: Step 6 Configure first web-site
+  uri:
+    url: "http://localhost/index.php?action=firstWebsiteSetup&module=Installation"
+    body:
+      siteName: "example.org"
+      url: "http://example.org"
+      timezone: "Europe/Paris"
+      ecommerce: 0
+    body_format: form-urlencoded
+    method: POST
+    status_code: 302
+    validate_certs: no
+
+- pause:
+    seconds: 1
+
+- name: Step 7 Display JavaScript tracking code
+  uri:
+    url: "http://localhost/index.php?action=trackingCode&module=Installation&site_idSite=1&site_name=example.org"
+    method: GET
+    status_code: 200
+    validate_certs: no
+
+- pause:
+    seconds: 1
+
+- name: Step 8 Finished!
+  uri:
+    url: "http://localhost/index.php?action=finished&module=Installation"
+    body:
+      do_not_track: 1
+      anonymise_ip: 1
+      submit: "Continue to Matomo »"
+    body_format: form-urlencoded
+    method: POST
+    status_code: 302
+    validate_certs: no
+
+- name: Edit trusted_hosts
+  ini_file:
+    path: /var/www/matomo/config/config.ini.php
+    section: General
+    option: trusted_hosts[]
+    value: "{{ matomo_name }}"
+
+- name: Remove security warning
+  ini_file:
+    path: /var/www/matomo/config/config.ini.php
+    section: General
+    option: assume_secure_protocol
+    value: 1
