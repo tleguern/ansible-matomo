@@ -1,5 +1,5 @@
-dw-matomo
-=========
+ansible-matomo
+==============
 
 Ansible role for configuring Matomo. While it is possible to use it as is it was designed to be used from Packer using the ansible-local provisioner.
 
@@ -50,7 +50,7 @@ Example Playbook
         matomo_superuser_password: "{{ vaulted_matomo_superuser_password }}"
         matomo_name: stats.example.org
       roles:
-      - role: dw-matomo
+      - role: ansible-matomo
 
 License
 -------
