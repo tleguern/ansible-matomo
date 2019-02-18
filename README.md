@@ -3,6 +3,8 @@ ansible-matomo
 
 Ansible role for configuring Matomo. While it is possible to use it as is it was designed to be used from Packer using the ansible-local provisioner.
 
+This role will first configure mysql and nginx to run a freshly downloaded Matomo 3.8.1. Then it will complete the manual installation process automaticaly thanks to the uri module.
+
 Requirements
 ------------
 
@@ -41,7 +43,7 @@ None.
 Example Playbook
 ----------------
 
-    - hosts: all
+    - hosts: matomo
       vars:
         mysql_rescue_user: rescue
         mysql_rescue_password: "{{ vaulted_mysql_rescue_password }}"
@@ -51,6 +53,22 @@ Example Playbook
         matomo_name: stats.example.org
       roles:
       - role: ansible-matomo
+
+Example with Packer
+-------------------
+
+In your JSON file add something like this:
+
+    {
+      "type": "ansible-local",
+      "playbook_file": "install_matomo.yaml",
+      "inventory_groups": "matomo",
+      "extra_arguments": [
+        "-b"
+      ]
+    }
+
+You might need to user a shell provider first to install ansible as well as your playground (group_vars, roles and vault keys).
 
 License
 -------
