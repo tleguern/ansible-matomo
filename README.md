@@ -22,6 +22,7 @@ For Debian 9 or equivalent:
 - python3-mysqldb
 - mysql-server
 - nginx
+- tar
 
 Role Variables
 --------------
