@@ -1,11 +1,19 @@
 ---
 - include: mysql.yml
 
-- name: Download and extract matomo
+- name: Download matomo
+  get_url:
+    url: "https://builds.matomo.org/matomo-{{ __matomo_version }}.tar.gz"
+    dest: /tmp
+    owner: www-data
+    group: www-data
+    mode: 0755
+
+- name: Extract matomo
   unarchive:
-    src: https://builds.matomo.org/matomo-3.8.1.tar.gz
+    src: "/tmp/matomo-{{ __matomo_version }}.tar.gz"
+    remote_src: yes
     dest: /var/www
-    remote_src: true
     owner: www-data
     group: www-data
     mode: 0755

@@ -3,7 +3,7 @@ ansible-matomo
 
 Ansible role for configuring Matomo. While it is possible to use it as is it was designed to be used from Packer using the ansible-local provisioner.
 
-This role will first configure mysql and nginx to run a freshly downloaded Matomo 3.8.1. Then it will complete the manual installation process automaticaly thanks to the uri module.
+This role will first configure mysql and nginx to run a freshly downloaded Matomo 3.9.0. Then it will complete the manual installation process automaticaly thanks to the uri module.
 
 Requirements
 ------------
@@ -32,6 +32,7 @@ Role Variables
 - *matomo_name*: The domain name pointing to matomo ;
 - *matomo_superuser_user*: Name for matomo superuser ;
 - *matomo_superuser_password*: Password for *matomo_superuser_user* ;
+- *matomo_version*: The specific Matomo version to install, a default is provided ;
 - *mysql_rescue_user*: Optionnal rescue mysql user with SUPER and PROCESS rights on *matomo_mysql_database* ;
 - *mysql_rescue_password*: Password for *mysql_rescue_user*.
 
