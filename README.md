@@ -5,6 +5,12 @@ Ansible role for configuring Matomo. While it is possible to use it as is it was
 
 This role will first configure mysql and nginx to run a freshly downloaded Matomo 3.9.0. Then it will complete the manual installation process automaticaly thanks to the uri module.
 
+What is **not** automatic yet:
+
+- configuration of the geoip database ;
+- configuration of the trusted sites ;
+- user creation.
+
 Requirements
 ------------
 
