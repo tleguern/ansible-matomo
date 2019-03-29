@@ -156,3 +156,10 @@
     option: proxy_client_headers[]
     value: HTTP_X_FORWARDED_FOR
   when: __matomo_proxy == true
+
+- name: Configure automatic archival of reports
+  cron:
+    name: "matomo arcive"
+    special_time: "daily"
+    user: www-data
+    job: "/usr/bin/php /var/www/matomo/console core:archive --url=https://{{ matomo_name }}"
