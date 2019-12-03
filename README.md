@@ -33,16 +33,18 @@ For Debian 9 or equivalent:
 Role Variables
 --------------
 
-- *matomo_mysql_database*: Optionnal definition of the database name, default is “matomodata” ;
-- *matomo_mysql_user*: Optionnal name for mysql user, default is “matomo” ;
-- *matomo_mysql_password*: Password for *matomo_mysql_user* ;
-- *matomo_name*: The domain name pointing to matomo ;
-- *matomo_superuser_user*: Name for matomo superuser ;
-- *matomo_superuser_password*: Password for *matomo_superuser_user* ;
-- *matomo_version*: The specific Matomo version to install, a default is provided ;
-- *matomo_proxy*: Configure Matomo to use the X-Forwarded-For header ;
-- *mysql_rescue_user*: Optionnal rescue mysql user with SUPER and PROCESS rights on *matomo_mysql_database* ;
-- *mysql_rescue_password*: Password for *mysql_rescue_user*.
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `matomo_mysql_database` | Optionnal definition of the database name | `matomodata` |
+| `matomo_mysql_user` | Optionnal name for mysql user | `matomo` |
+| `matomo_mysql_password` | Password for `matomo_mysql_user` | |
+| `matomo_name` | The domain name pointing to matomo | |
+| `matomo_superuser_user` | Name for matomo superuser | |
+| `matomo_superuser_password` | Password for `matomo_superuser_user` | |
+| `matomo_version` | The specific Matomo version to install | "3.9.0" |
+| `matomo_proxy` | Configure Matomo to use the X-Forwarded-For header | false |
+| `mysql_rescue_user` | Optionnal rescue mysql user with SUPER and PROCESS rights on `matomo_mysql_database` | |
+| `mysql_rescue_password` | Password for *mysql_rescue_user* | |
 
 Dependencies
 ------------
