@@ -1,23 +1,18 @@
 image: debian/stretch
 packages:
   - mysql-server
-  - nginx
-  - php
-  - php-cli
-  - php-curl
-  - php-fpm
-  - php-gd
-  - php-mbstring
-  - php-mysql
-  - php-xml
-  - python3-mysqldb
-  - python3-openssl
+  - python-mysqldb
+  - python-openssl
   - python3-pip
   - tar
 sources:
   - https://github.com/Aversiste/ansible-matomo
 tasks:
-  - prerequisites: |
+  - packages: |
+      # Please Debian, stop trying to be smart and don't install apache2
+      sudo apt-get -qq install --no-install-recommends nginx php php-cli \
+          php-curl php-fpm php-gd php-mbstring php-mysql php-xml
+  - pip: |
       sudo pip3 -q install ansible
   - setup: |
       echo "Creating roles/ directory"
