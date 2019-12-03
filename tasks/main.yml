@@ -147,7 +147,7 @@
     path: /var/www/matomo/config/config.ini.php
     section: General
     option: assume_secure_protocol
-    value: 1
+    value: "1"
 
 - name: Configure reverse proxy
   ini_file:
