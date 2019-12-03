@@ -44,7 +44,7 @@ Role Variables
 | `matomo_version` | The specific Matomo version to install | "3.9.0" |
 | `matomo_proxy` | Configure Matomo to use the X-Forwarded-For header | false |
 | `mysql_rescue_user` | Optionnal rescue mysql user with SUPER and PROCESS rights on `matomo_mysql_database` | |
-| `mysql_rescue_password` | Password for *mysql_rescue_user* | |
+| `mysql_rescue_password` | Password for `mysql_rescue_user` | |
 
 Dependencies
 ------------
@@ -79,7 +79,7 @@ In your JSON file add something like this:
       ]
     }
 
-You might need to user a shell provider first to install ansible as well as your playground (group_vars, roles and vault keys).
+You might need to use a shell provider first to install ansible as well as your playground (group_vars, roles and vault keys).
 
 License
 -------
