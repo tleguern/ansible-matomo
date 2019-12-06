@@ -155,7 +155,7 @@
     section: General
     option: proxy_client_headers[]
     value: HTTP_X_FORWARDED_FOR
-  when: __matomo_proxy == true
+  when: __matomo_proxy
 
 - name: Configure automatic archival of reports
   cron:
