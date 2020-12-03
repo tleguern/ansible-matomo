@@ -88,7 +88,7 @@
       login: "{{ __matomo_superuser_user }}"
       password: "{{ __matomo_superuser_password }}"
       password_bis: "{{ __matomo_superuser_password }}"
-      email: "_ops@deverywa.re"
+      email: "{{ __matomo_superuser_email }}"
       subscribe_newsletter_piwikorg: 0
       subscribe_newsletter_professionalservices: 0
     body_format: form-urlencoded
