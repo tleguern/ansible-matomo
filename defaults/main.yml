@@ -1,6 +1,6 @@
 ---
-matomo_bypass_mysql: yes
-matomo_bypass_nginx: yes
+matomo_bypass_mysql: true
+matomo_bypass_nginx: true
 matomo_mysql_database: matomodata
 matomo_mysql_user: matomo
 matomo_version: 3.9.0
