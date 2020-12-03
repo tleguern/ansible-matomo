@@ -17,14 +17,14 @@
   unarchive:
     src: "/tmp/matomo-{{ matomo_version }}.tar.gz"
     remote_src: yes
-    dest: /var/www
+    dest: "{{ matomo_www_directory }}"
     owner: www-data
     group: www-data
     mode: 0755
 
 - name: Remove superflous file
   file:
-    path: "/var/www/How to install Matomo.html"
+    path: "{{ matomo_www_directory }}/How to install Matomo.html"
     state: absent
 
 - wait_for:
@@ -139,21 +139,21 @@
 
 - name: Edit trusted_hosts
   ini_file:
-    path: /var/www/matomo/config/config.ini.php
+    path: "{{ matomo_www_directory }}/matomo/config/config.ini.php"
     section: General
     option: trusted_hosts[]
     value: "{{ matomo_name }}"
 
 - name: Remove security warning
   ini_file:
-    path: /var/www/matomo/config/config.ini.php
+    path: "{{ matomo_www_directory }}/matomo/config/config.ini.php"
     section: General
     option: assume_secure_protocol
     value: "1"
 
 - name: Configure reverse proxy
   ini_file:
-    path: /var/www/matomo/config/config.ini.php
+    path: "{{ matomo_www_directory }}/matomo/config/config.ini.php"
     section: General
     option: proxy_client_headers[]
     value: HTTP_X_FORWARDED_FOR
@@ -164,4 +164,4 @@
     name: "matomo arcive"
     special_time: "daily"
     user: www-data
-    job: "/usr/bin/php /var/www/matomo/console core:archive --url=https://{{ matomo_name }}"
+    job: "/usr/bin/php {{ matomo_www_directory }}/console core:archive --url=https://{{ matomo_name }}"
