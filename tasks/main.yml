@@ -3,7 +3,7 @@
 
 - name: Download matomo
   get_url:
-    url: "https://builds.matomo.org/matomo-{{ __matomo_version }}.tar.gz"
+    url: "https://builds.matomo.org/matomo-{{ matomo_version }}.tar.gz"
     dest: /tmp
     owner: www-data
     group: www-data
@@ -11,7 +11,7 @@
 
 - name: Extract matomo
   unarchive:
-    src: "/tmp/matomo-{{ __matomo_version }}.tar.gz"
+    src: "/tmp/matomo-{{ matomo_version }}.tar.gz"
     remote_src: yes
     dest: /var/www
     owner: www-data
@@ -56,9 +56,9 @@
     url: "http://localhost/index.php?action=databaseSetup"
     body:
       host: "127.0.0.1"
-      username: "{{ __matomo_mysql_user }}"
+      username: "{{ matomo_mysql_user }}"
       password: "{{ __matomo_mysql_password }}"
-      dbname: "{{ __matomo_mysql_database }}"
+      dbname: "{{ matomo_mysql_database }}"
       tables_prefix: "matomo_"
       adapter: "PDO\\MYSQL"
     body_format: form-urlencoded
@@ -83,9 +83,9 @@
   uri:
     url: "http://localhost/index.php?action=setupSuperUser&module=Installation"
     body:
-      login: "{{ matomo_superuser_user }}"
-      password: "{{ matomo_superuser_password }}"
-      password_bis: "{{ matomo_superuser_password }}"
+      login: "{{ __matomo_superuser_user }}"
+      password: "{{ __matomo_superuser_password }}"
+      password_bis: "{{ __matomo_superuser_password }}"
       email: "_ops@deverywa.re"
       subscribe_newsletter_piwikorg: 0
       subscribe_newsletter_professionalservices: 0
@@ -155,7 +155,7 @@
     section: General
     option: proxy_client_headers[]
     value: HTTP_X_FORWARDED_FOR
-  when: __matomo_proxy
+  when: matomo_proxy != no
 
 - name: Configure automatic archival of reports
   cron:
