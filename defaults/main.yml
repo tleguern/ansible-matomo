@@ -5,6 +5,7 @@ matomo_mysql_database: matomodata
 matomo_mysql_user: matomo
 matomo_version: 3.9.0
 matomo_proxy: no
+matomo_www_directory: /var/www/
 __matomo_mysql_password: "{{ matomo_mysql_password | mandatory }}"
 __matomo_name: "{{ matomo_name | mandatory }}"
 __matomo_superuser_user: "{{ matomo_superuser_user | mandatory }}"
