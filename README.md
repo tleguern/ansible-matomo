@@ -3,15 +3,16 @@ ansible-matomo
 
 [![builds.sr.ht status](https://builds.sr.ht/~tleguern/ansible-matomo.svg)](https://builds.sr.ht/~tleguern/ansible-matomo?)
 
-Ansible role for configuring Matomo. While it is possible to use it as is it was designed to be used from Packer using the ansible-local provisioner.
+Ansible role for configuring Matomo, formerly known as Piwik.
 
-This role will first configure mysql and nginx to run a freshly downloaded Matomo 3.9.0. Then it will complete the manual installation process automaticaly thanks to the uri module.
+This role configures Matomo, formerly known as Piwik, and optionally handle the configuration of MySQL and Nginx for minimal installations.
+It then download a given release and complete the manual installation process automatically thanks to the [uri](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/uri_module.html) module.
 
 What is **not** automatic yet:
 
-- configuration of the geoip database ;
-- configuration of the trusted sites ;
-- user creation.
+- Configuration of the geoip database ;
+- Configuration of the trusted sites ;
+- User creation.
 
 Requirements
 ------------
@@ -37,16 +38,16 @@ Role Variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `matomo_mysql_database` | Optionnal definition of the database name | `matomodata` |
-| `matomo_mysql_user` | Optionnal name for mysql user | `matomo` |
+| `matomo_mysql_database` | Optional definition of the database name | `matomodata` |
+| `matomo_mysql_user` | Optional name for mysql user | `matomo` |
 | `matomo_mysql_password` | Password for `matomo_mysql_user` | |
-| `matomo_name` | The domain name pointing to matomo | |
-| `matomo_superuser_user` | Name for matomo superuser | |
-| `matomo_superuser_password` | Password for `matomo_superuser_user` | |
-| `matomo_version` | The specific Matomo version to install | "3.9.0" |
-| `matomo_proxy` | Configure Matomo to use the X-Forwarded-For header | false |
-| `mysql_rescue_user` | Optionnal rescue mysql user with SUPER and PROCESS rights on `matomo_mysql_database` | |
-| `mysql_rescue_password` | Password for `mysql_rescue_user` | |
+| `matomo_name` | The domain name pointing to matomo | mandatory |
+| `matomo_superuser_user` | Name for matomo superuser | mandatory |
+| `matomo_superuser_password` | Password for `matomo_superuser_user` | mandatory |
+| `matomo_version` | The specific matomo version to install | "3.9.0" |
+| `matomo_proxy` | Configure matomo to use the X-Forwarded-For header | `no` |
+| `mysql_rescue_user` | Optional rescue mysql user with SUPER and PROCESS rights on `matomo_mysql_database`. Only used if `matomo_bypass_mysql` is not `yes`. | `` |
+| `mysql_rescue_password` | Password for `mysql_rescue_user`. Only used if `matomo_bypass_mysql` is not `yes`. | `` |
 
 Dependencies
 ------------
