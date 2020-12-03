@@ -44,6 +44,7 @@ Role Variables
 | `matomo_name` | The domain name pointing to matomo | mandatory |
 | `matomo_superuser_user` | Name for matomo superuser | mandatory |
 | `matomo_superuser_password` | Password for `matomo_superuser_user` | mandatory |
+| `matomo_superuser_email` | Email address for `matomo_superuser_user` | mandatory |
 | `matomo_version` | The specific matomo version to install | "3.9.0" |
 | `matomo_proxy` | Configure matomo to use the X-Forwarded-For header | `no` |
 | `mysql_rescue_user` | Optional rescue mysql user with SUPER and PROCESS rights on `matomo_mysql_database`. Only used if `matomo_bypass_mysql` is not `yes`. | `` |
