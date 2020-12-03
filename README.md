@@ -48,6 +48,8 @@ Role Variables
 | `matomo_proxy` | Configure matomo to use the X-Forwarded-For header | `no` |
 | `mysql_rescue_user` | Optional rescue mysql user with SUPER and PROCESS rights on `matomo_mysql_database`. Only used if `matomo_bypass_mysql` is not `yes`. | `` |
 | `mysql_rescue_password` | Password for `mysql_rescue_user`. Only used if `matomo_bypass_mysql` is not `yes`. | `` |
+| `matomo_bypass_mysql` | Do not configure mysql | `yes` |
+| `matomo_bypass_nginx` | Do not configure nginx | `yes` |
 
 Dependencies
 ------------

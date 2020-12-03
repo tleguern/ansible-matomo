@@ -1,5 +1,9 @@
 ---
 - include: mysql.yml
+  when: matomo_bypass_mysql == yes
+
+- include: nginx.yml
+  when: matomo_bypass_nginx == yes
 
 - name: Download matomo
   get_url:
@@ -22,8 +26,6 @@
   file:
     path: "/var/www/How to install Matomo.html"
     state: absent
-
-- include: nginx.yml
 
 - wait_for:
     host: localhost
