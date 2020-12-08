@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: matomo
   author: Tristan Le Guern
   description: 
   company: Deveryware
