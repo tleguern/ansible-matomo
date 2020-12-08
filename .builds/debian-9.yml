@@ -1,19 +1,28 @@
-image: debian/stretch
+image: debian/buster
 packages:
-  - mysql-server
-  - python-mysqldb
+  - default-mysql-server
+  - nginx
+  - php
+  - php-cli
+  - php-curl
+  - php-fpm
+  - php-gd
+  - php-mbstring
+  - php-mysql
+  - php-xml
+  - python
+  - python-pymysql
   - python-openssl
-  - python3-pip
+  - python-pip
+  - python-setuptools
+  - python-yaml
+  - python-wheel
   - tar
 sources:
-  - https://github.com/Aversiste/ansible-matomo
+  - https://git.sr.ht/~tleguern/ansible-matomo
 tasks:
-  - packages: |
-      # Please Debian, stop trying to be smart and don't install apache2
-      sudo apt-get -qq install --no-install-recommends nginx php php-cli \
-          php-curl php-fpm php-gd php-mbstring php-mysql php-xml
   - pip: |
-      sudo pip3 -q install ansible
+      pip -q install ansible
   - setup: |
       echo "Creating roles/ directory"
       mkdir roles
@@ -41,6 +50,8 @@ tasks:
       mkdir group_vars
       cat <<EOD > group_vars/all.yml
       ---
+      matomo_bypass_mysql: false
+      matomo_bypass_nginx: false
       matomo_mysql_database: matomodata
       matomo_mysql_user: matomo
       matomo_mysql_password: matomo
@@ -48,6 +59,8 @@ tasks:
       matomo_superuser_password: adminadmin42
       matomo_version: "3.9.0"
       matomo_name: localhost
+      matomo_superuser_email: admin@example.org
       EOD
   - run: |
-      /usr/local/bin/ansible-playbook -b -i inventory playbook.yml
+      export PATH="$PATH:~/.local/bin"
+      ansible-playbook -b -i inventory playbook.yml
