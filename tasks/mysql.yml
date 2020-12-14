@@ -3,6 +3,7 @@
   mysql_db:
     name: "{{ matomo_mysql_database }}"
     state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
 
 - name: MySQL - Ensure matomo user is created
   mysql_user:
@@ -11,6 +12,7 @@
     password: "{{ __matomo_mysql_password }}"
     priv: "*.*:FILE/{{ matomo_mysql_database }}.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,CREATE\ TEMPORARY\ TABLES,LOCK\ TABLES"
     state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
 
 - name: MySQL - Ensure rescue user is created
   mysql_user:
@@ -19,6 +21,7 @@
     password: "{{ mysql_rescue_password }}"
     priv: "*.*:SUPER,PROCESS/{{ matomo_mysql_database }}.*:ALL"
     state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
   when: "mysql_rescue_user is defined"
 
 - name: MySQL - Ensure recommended default is used
