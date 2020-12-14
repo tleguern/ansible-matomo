@@ -1,9 +1,9 @@
 ---
 - include: mysql.yml
-  when: matomo_bypass_mysql == yes
+  when: matomo_bypass_mysql
 
 - include: nginx.yml
-  when: matomo_bypass_nginx == yes
+  when: matomo_bypass_nginx
 
 - name: Download matomo
   get_url:
@@ -157,7 +157,7 @@
     section: General
     option: proxy_client_headers[]
     value: HTTP_X_FORWARDED_FOR
-  when: matomo_proxy != no
+  when: not matomo_proxy
 
 - name: Configure automatic archival of reports
   cron:
