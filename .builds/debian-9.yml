@@ -10,9 +10,13 @@ packages:
   - php-mbstring
   - php-mysql
   - php-xml
-  - python3-mysqldb
+  - python3
+  - python3-pymysql
   - python3-openssl
   - python3-pip
+  - python3-setuptools
+  - python3-yaml
+  - python3-wheel
   - tar
 sources:
   - https://github.com/Aversiste/ansible-matomo
