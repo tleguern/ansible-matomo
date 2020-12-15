@@ -1,0 +1,22 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    mysql_databases:
+      - name: matomodata
+    mysql_users:
+      - name: matomo
+        password: matomo
+        priv: "*.*:FILE/matomodata.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,CREATE\ TEMPORARY\ TABLES,LOCK\ TABLES"
+    mysql_log: syslog
+    mysql_log_error: syslog
+  tasks:
+    - name: "Include aversiste.mysql"
+      include_role:
+        name: "aversiste.mysql"
+    #- name: "Include reallyenglish.httpd"
+    #  include_role:
+    #    name: "reallyenglish.httpd"
+    #- name: "Include ansible-matomo"
+    #  include_role:
+    #    name: "ansible-matomo"

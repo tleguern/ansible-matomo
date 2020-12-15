@@ -1,0 +1,8 @@
+---
+- src: https://github.com/Aversiste/ansible-role-mysql
+  name: aversiste.mysql
+  version: openbsd
+
+- src: https://github.com/reallyenglish/ansible-role-httpd
+  name:  reallyenglish.httpd
+  version: master
