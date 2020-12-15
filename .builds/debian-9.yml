@@ -10,57 +10,21 @@ packages:
   - php-mbstring
   - php-mysql
   - php-xml
-  - python
-  - python-pymysql
-  - python-openssl
-  - python-pip
-  - python-setuptools
-  - python-yaml
-  - python-wheel
+  - python3
+  - python3-pymysql
+  - python3-openssl
+  - python3-pip
+  - python3-setuptools
+  - python3-yaml
+  - python3-wheel
   - tar
 sources:
   - https://git.sr.ht/~tleguern/ansible-matomo
 tasks:
   - pip: |
-      pip -q install ansible
-  - setup: |
-      echo "Creating roles/ directory"
-      mkdir roles
-      mv ansible-matomo roles/
-      echo "Creating ansible.cfg"
-      cat <<EOD > ansible.cfg
-      [defaults]
-      stdout_callback = yaml
-      roles_path = roles
-      EOD
-      echo "Creating inventory"
-      cat <<EOD > inventory
-      [all]
-      localhost
-      EOD
-      echo "Creating playbook.yml"
-      cat <<EOD > playbook.yml
-      ---
-      - hosts: all
-        connection: local
-        roles:
-          - role: ansible-matomo
-      EOD
-      echo "Creating group_vars/ directory"
-      mkdir group_vars
-      cat <<EOD > group_vars/all.yml
-      ---
-      matomo_bypass_mysql: false
-      matomo_bypass_nginx: false
-      matomo_mysql_database: matomodata
-      matomo_mysql_user: matomo
-      matomo_mysql_password: matomo
-      matomo_superuser_user: admin
-      matomo_superuser_password: adminadmin42
-      matomo_version: "3.9.0"
-      matomo_name: localhost
-      matomo_superuser_email: admin@example.org
-      EOD
-  - run: |
-      export PATH="$PATH:~/.local/bin"
-      ansible-playbook -b -i inventory playbook.yml
+      . ./.profile
+      pip3 -q install ansible molecule
+  - molecule: |
+      . ./.profile
+      cd ansible-matomo
+      molecule test -s debian-buster

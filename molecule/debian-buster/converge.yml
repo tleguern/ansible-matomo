@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars:
+    # Matomo
+    matomo_bypass_mysql: false
+    matomo_bypass_nginx: false
+    matomo_mysql_database: matomodata
+    matomo_mysql_user: matomo
+    matomo_mysql_password: matomo
+    matomo_superuser_user: admin
+    matomo_superuser_password: adminadmin42
+    matomo_version: "3.9.0"
+    matomo_name: localhost
+    matomo_superuser_email: admin@example.org
+    # MySQL
+    mysql_databases:
+      - name: "{{ matomo_mysql_database }}"
+    mysql_users:
+      - name: "{{ matomo_mysql_user }}"
+        password: "{{ matomo_mysql_password }}"
+        priv: "*.*:FILE/appdata.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,CREATE\ TEMPORARY\ TABLES,LOCK\ TABLES"
+    mysql_db_admin_password: adminpassword
+  tasks:
+    - name: "Include ansible-matomo"
+      include_role:
+        name: "ansible-matomo"
+
