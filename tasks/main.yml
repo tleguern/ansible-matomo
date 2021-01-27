@@ -1,4 +1,10 @@
 ---
+- name: Include OS-specific variables.
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_os_family }}.yml"
+
 - include: mysql.yml
   when: not matomo_bypass_mysql
 
@@ -9,8 +15,8 @@
   get_url:
     url: "https://builds.matomo.org/matomo-{{ matomo_version }}.tar.gz"
     dest: /tmp
-    owner: www-data
-    group: www-data
+    owner: "{{ matomo_www_user }}"
+    group: "{{ matomo_www_group }}"
     mode: 0755
 
 - name: Extract matomo
@@ -18,8 +24,8 @@
     src: "/tmp/matomo-{{ matomo_version }}.tar.gz"
     remote_src: yes
     dest: "{{ matomo_www_directory }}"
-    owner: www-data
-    group: www-data
+    owner: "{{ matomo_www_user }}"
+    group: "{{ matomo_www_group }}"
     mode: 0755
 
 - name: Remove superflous file
@@ -163,5 +169,5 @@
   cron:
     name: "matomo arcive"
     special_time: "daily"
-    user: www-data
+    user: "{{ matomo_www_user }}"
     job: "/usr/bin/php {{ matomo_www_directory }}/console core:archive --url=https://{{ matomo_name }}"

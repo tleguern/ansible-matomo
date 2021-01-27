@@ -11,3 +11,7 @@ __matomo_name: "{{ matomo_name | mandatory }}"
 __matomo_superuser_user: "{{ matomo_superuser_user | mandatory }}"
 __matomo_superuser_password: "{{ matomo_superuser_password | mandatory }}"
 __matomo_superuser_email: "{{ matomo_superuser_email | mandatory }}"
+
+# OS-specific variables
+matomo_www_user: "{{ __matomo_www_user }}"
+matomo_www_group: "{{ __matomo_www_group }}"
