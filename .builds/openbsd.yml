@@ -1,0 +1,26 @@
+image: openbsd/6.8
+packages:
+  - python-3.8.6p0
+  - py3-pip
+  - ansible
+  - py3-dateutil # Install available molecule dependencies to reduce pip time
+  - py3-certifi
+  - py3-urllib3
+  - py3-chardet
+  - py3-typing_extensions
+  - py3-colorama
+  - py3-parsing
+    py3-pathspec
+  - py3-pluggy
+sources:
+  - https://git.sr.ht/~tleguern/ansible-matomo
+tasks:
+  - init: |
+      doas ln -sf /usr/local/bin/pip3.8 /usr/local/bin/pip
+  - pip: |
+      export PATH="$PATH:~/.local/bin"
+      pip install --progress-bar off molecule
+  - molecule: |
+      export PATH="$PATH:~/.local/bin"
+      cd ansible-matomo
+      molecule test -s openbsd
