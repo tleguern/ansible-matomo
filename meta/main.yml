@@ -1,10 +1,17 @@
 galaxy_info:
   role_name: matomo
   author: Tristan Le Guern
-  description: 
+  description: Ansible role for Matomo (formerly Piwik)
   company: Deveryware
   license: ICS
   min_ansible_version: 2.7
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+    - name: OpenBSD
+      versions:
+        - 6.8
   galaxy_tags:
   - piwik
   - matomo
