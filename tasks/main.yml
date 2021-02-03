@@ -178,4 +178,4 @@
     name: "matomo arcive"
     special_time: "daily"
     user: "{{ matomo_www_user }}"
-    job: "/usr/bin/php {{ matomo_www_directory }}/console core:archive --url=https://{{ matomo_name }}"
+    job: "{{ matomo_php_interpreter }} {{ matomo_www_directory }}/console core:archive --url=https://{{ matomo_name }}"

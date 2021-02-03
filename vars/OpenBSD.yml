@@ -1,3 +1,4 @@
 ---
 __matomo_www_user: www
 __matomo_www_group: www
+__matomo_php_interpreter: /usr/local/bin/php-7.3

@@ -1,3 +1,4 @@
 ---
 __matomo_www_user: www-data
 __matomo_www_group: www-data
+__matomo_php_interpreter: /usr/bin/php

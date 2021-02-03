@@ -66,6 +66,19 @@ Matomo can be installed in a chroot and works fine with OpenBSD's httpd.
 | `matomo_bypass_mysql` | Do not configure mysql | `yes` |
 | `matomo_bypass_nginx` | Do not configure nginx | `yes` |
 | `matomo_www_directory` | Matomo install directory | `/var/www` |
+| `matomo_php_interpreter` | Path to PHP | `{{ __matomo_php_interpreter }}`
+
+### Debian
+
+| Variable | Default |
+|----------|---------|
+| `__matomo_php_interpreter` | `/usr/bin/php` |
+
+### OpenBSD
+
+| Variable | Default |
+|----------|---------|
+| `__matomo_php_interpreter` | `/usr/local/bin/php-7.3` |
 
 ## Dependencies
 
