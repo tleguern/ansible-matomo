@@ -119,7 +119,9 @@ Regular installation on OpenBSD. Additional steps are needed once the installati
           listen on 127.0.0.1 port 80
           directory index index.php
           root "/matomo"
-          fastcgi socket "/run/php-fpm.sock"
+          location "*.php" {
+            fastcgi socket "/run/php-fpm.sock"
+          }
   pre_tasks:
     - name: Configure pdo_mysql
       file:

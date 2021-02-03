@@ -31,7 +31,9 @@
           listen on 127.0.0.1 port 80
           directory index index.php
           root "/matomo"
-          fastcgi socket "/run/php-fpm.sock"
+          location "*.php" {
+            fastcgi socket "/run/php-fpm.sock"
+          }
     # Misc
     dependencies:
       - php-7.3.24
