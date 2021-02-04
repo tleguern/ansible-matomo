@@ -3,7 +3,7 @@ galaxy_info:
   author: Tristan Le Guern
   description: Ansible role for Matomo (formerly Piwik)
   company: Deveryware
-  license: ICS
+  license: ISC
   min_ansible_version: 2.7
   platforms:
     - name: Debian
