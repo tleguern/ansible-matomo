@@ -36,10 +36,10 @@
           }
     # Misc
     dependencies:
-      - php-7.3.24
-      - php-gd-7.3.24
-      - php-pdo_mysql-7.3.24
-      - php-curl-7.3.24
+      - php%7.3
+      - php-gd%7.3
+      - php-pdo_mysql%7.3
+      - php-curl%7.3
       - gtar-1.32p1-static
   tasks:
     - name: "Include tleguern.mysql"

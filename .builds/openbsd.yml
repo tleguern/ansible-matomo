@@ -12,15 +12,16 @@ packages:
   - py3-parsing
     py3-pathspec
   - py3-pluggy
+  - rust
 sources:
   - https://git.sr.ht/~tleguern/ansible-matomo
+environment:
+  PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
 tasks:
   - init: |
       doas ln -sf /usr/local/bin/pip3.8 /usr/local/bin/pip
   - pip: |
-      export PATH="$PATH:~/.local/bin"
-      pip install --progress-bar off molecule
+      pip install -q molecule==3.2.4
   - molecule: |
-      export PATH="$PATH:~/.local/bin"
       cd ansible-matomo
       molecule test -s openbsd
