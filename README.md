@@ -85,7 +85,7 @@ Matomo can be installed in a chroot and works fine with OpenBSD's httpd.
 Any role configuring MySQL, such as:
 
 - geerlingguy.mysql
-- aversiste.mysql
+- tleguern.mysql
 
 Any role configuring a web server, such as:
 
@@ -106,7 +106,7 @@ Minimal installation with included lightweight configuration of Nginx and MySQL 
     matomo_superuser_password: "{{ vaulted_matomo_superuser_password }}"
     matomo_name: stats.example.org
   roles:
-  - role: aversiste.matomo
+  - role: tleguern.matomo
 ```
 
 Regular installation on OpenBSD. Additional steps are needed once the installation is over to open the web server to the Internet:
@@ -148,9 +148,9 @@ Regular installation on OpenBSD. Additional steps are needed once the installati
         state: started
         enabled: yes
   roles:
-    - role: aversiste.mysql
+    - role: tleguern.mysql
     - role: reallyenglish.ansible-role-httpd
-    - role: aversiste.matomo
+    - role: tleguern.matomo
 ```
 
 ## License
@@ -159,7 +159,7 @@ ISC
 
 ## Contributing
 
-Either send [send GitHub pull requests](https://github.com/Aversiste/ansible-matomo) or [send patches on SourceHut](https://lists.sr.ht/~tleguern/misc).
+Either send [send GitHub pull requests](https://github.com/tleguern/ansible-matomo) or [send patches on SourceHut](https://lists.sr.ht/~tleguern/misc).
 
 ## Author Information
 

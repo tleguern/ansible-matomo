@@ -42,9 +42,9 @@
       - php-curl-7.3.24
       - gtar-1.32p1-static
   tasks:
-    - name: "Include aversiste.mysql"
+    - name: "Include tleguern.mysql"
       include_role:
-        name: "aversiste.mysql"
+        name: "tleguern.mysql"
     - name: Install testing dependencies
       openbsd_pkg:
         name: "{{ dependencies }}"
