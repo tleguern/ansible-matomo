@@ -13,7 +13,7 @@ What is **not** automatic yet:
 - Configuration of the trusted sites ;
 - User creation.
 
-Automatic testing is provided using molecule's delegated driver and https://builds.sr.ht.
+Automatic testing is provided using molecule's delegated driver and <https://builds.sr.ht>.
 For now only the `converge` step is implemented.
 
 It should be noted that this role is not idempotent yet.
