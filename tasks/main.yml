@@ -157,6 +157,7 @@
     section: General
     option: trusted_hosts[]
     value: "{{ matomo_name }}"
+    mode: 0644
 
 - name: Remove security warning
   ini_file:
@@ -164,6 +165,7 @@
     section: General
     option: assume_secure_protocol
     value: "1"
+    mode: 0644
 
 - name: Configure reverse proxy
   ini_file:
@@ -171,6 +173,7 @@
     section: General
     option: proxy_client_headers[]
     value: HTTP_X_FORWARDED_FOR
+    mode: 0644
   when: not matomo_proxy
 
 - name: Configure automatic archival of reports

@@ -1,6 +1,6 @@
 galaxy_info:
   role_name: matomo
-  author: Tristan Le Guern
+  author: tleguern
   description: Ansible role for Matomo (formerly Piwik)
   company: Deveryware
   license: ISC
