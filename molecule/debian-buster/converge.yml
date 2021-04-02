@@ -20,4 +20,3 @@
     - name: "Include ansible-matomo"
       include_role:
         name: "ansible-matomo"
-
