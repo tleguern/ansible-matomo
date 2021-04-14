@@ -7,7 +7,7 @@ dependency:
 driver:
   name: delegated
   options:
-    managed: False
+    managed: false
     ansible_connection_options:
       ansible_connection: local
 platforms:
@@ -20,7 +20,7 @@ provisioner:
       interpreter_python: /usr/local/bin/python3
 verifier:
   name: ansible
-  enabled: False
+  enabled: false
 scenario:
   check_sequence:
     - dependency
