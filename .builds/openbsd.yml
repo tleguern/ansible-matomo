@@ -1,18 +1,11 @@
-image: openbsd/6.8
+---
+image: openbsd/7.0
 packages:
-  - python-3.8.6p0
+  - python
   - py3-pip
+  - py3-wheel
+  - py3-yamllint
   - ansible
-  - py3-dateutil # Install available molecule dependencies to reduce pip time
-  - py3-certifi
-  - py3-urllib3
-  - py3-chardet
-  - py3-typing_extensions
-  - py3-colorama
-  - py3-parsing
-    py3-pathspec
-  - py3-pluggy
-  - rust
 sources:
   - https://git.sr.ht/~tleguern/ansible-matomo
 environment:
