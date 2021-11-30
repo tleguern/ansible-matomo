@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: molecule/shared_resources/requirements.yml
+    requirements-file: molecule/shared_resources/requirements.yml
+driver:
+  name: delegated
+  options:
+    managed: false
+    ansible_connection_options:
+      ansible_connection: local
+platforms:
+  - name: instance
+verifier:
+  name: ansible
+  enabled: false
+scenario:
+  check_sequence:
+    - dependency
+    - converge
+    - check
+  converge_sequence:
+    - dependency
+    - converge
+  test_sequence:
+    - dependency
+    - converge

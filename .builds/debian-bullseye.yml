@@ -1,0 +1,33 @@
+---
+image: debian/bullseye
+packages:
+  - default-mysql-server
+  - nginx
+  - php
+  - php-cli
+  - php-curl
+  - php-fpm
+  - php-gd
+  - php-mbstring
+  - php-mysql
+  - php-xml
+  - python3
+  - python3-pymysql
+  - python3-openssl
+  - python3-pip
+  - python3-setuptools
+  - python3-yaml
+  - python3-wheel
+  - tar
+sources:
+  - https://git.sr.ht/~tleguern/ansible-matomo
+environment:
+  PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
+tasks:
+  - pip: |
+      python3 -m pip install -qU pip
+      python3 -m pip install -q ansible
+      python3 -m pip install -q molecule==3.2.4
+  - molecule: |
+      cd ansible-matomo
+      molecule test -s debian-bullseye

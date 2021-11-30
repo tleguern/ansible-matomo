@@ -2,8 +2,8 @@
 # Taken from https://github.com/kuzm1ch/matomo-piwik
 
 - name: ensure nginx configuration file is present
-  copy:
-    src: nginx.conf
+  template:
+    src: nginx.conf.j2
     dest: /etc/nginx/sites-available/matomo
   notify: Restart nginx
 

@@ -19,7 +19,11 @@ server {
 	location ~ \.php$ {
 		include snippets/fastcgi-php.conf;
 		# With php-fpm (or other unix sockets):
+		{% if ansible_distribution_release == 'buster' %}
 		fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+		{% else  %}
+		fastcgi_pass unix:/var/run/php/php-fpm.sock;
+		{% endif %}
 		# With php-cgi (or other tcp sockets):
 		#fastcgi_pass 127.0.0.1:9000;
 	}

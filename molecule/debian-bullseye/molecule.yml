@@ -3,4 +3,4 @@ provisioner:
   name: ansible
   config_options:
     defaults:
-      interpreter_python: /usr/bin/python3
+      interpreter_python: /bin/python3
