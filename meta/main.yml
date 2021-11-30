@@ -1,3 +1,4 @@
+---
 galaxy_info:
   role_name: matomo
   author: tleguern
@@ -13,7 +14,7 @@ galaxy_info:
       versions:
         - 6.8
   galaxy_tags:
-  - piwik
-  - matomo
-  - analytics
+    - piwik
+    - matomo
+    - analytics
 dependencies: []
